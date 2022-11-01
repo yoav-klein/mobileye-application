@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     image_name = docker.image("yoavklein3/mobileye_test:0.1")
-                    my_image = docker.build(image_name)
+                    docker.build("yoavklein3/mobileye_test:0.1")
                     my_image.push()
                 }
             }
