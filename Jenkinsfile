@@ -2,9 +2,13 @@
 pipeline {
     agent any
     stages {
-        stage('First') {
+        stage('Build') {
             steps {
-                echo "Hello"
+                script {
+                    image_name = docker.image("yoavklein3/mobileye_test:0.1")
+                    my_image = docker.build(image_name)
+                    my_image.push()
+                }
             }
         }
     }
