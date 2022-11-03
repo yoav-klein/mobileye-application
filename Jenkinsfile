@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Update Service') {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsProvider',
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                 credentialsId: 'aws_account',
                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
