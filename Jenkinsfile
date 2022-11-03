@@ -8,7 +8,7 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            steps {                
+            steps {           
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
                 credentialsId: 'aws_account',
                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
@@ -36,9 +36,7 @@ pipeline {
                         def runCmd = "ecs update-service --cluster=${clusterName} --service=${serviceName} --force-new-deployment"
                         awsImage.run(runArgs, runCmd) 
                     }                          
-                }
             }
         }
     }
-
 }
