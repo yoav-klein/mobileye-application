@@ -19,10 +19,9 @@ pipeline {
                         amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin ${registryUrl}
                         docker push "${registryUrl}/my-app:latest"
                         """
-                }
-               
-            }
-        }
+                } // withCredentials
+            } // steps
+        } // stage('Build')
         stage('Update Service') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
@@ -35,8 +34,9 @@ pipeline {
                         def runArgs = "-e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -e AWS_REGION=${region}"
                         def runCmd = "ecs update-service --cluster=${clusterName} --service=${serviceName} --force-new-deployment"
                         awsImage.run(runArgs, runCmd) 
-                    }                          
-            }
-        }
-    }
-}
+                    }  // script                    
+                } // withCredentials
+            } // steps 
+        } // stage('Update..')
+    } // stages
+} // pipeline
