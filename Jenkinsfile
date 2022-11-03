@@ -34,7 +34,7 @@ pipeline {
                         sh returnStdout: true, script: """
                         docker build -t "${registryUrl}/my-app:latest" .
                         docker run -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_REGION=${region} \
-                        ecr get-login-password | docker login ${registryUrl}
+                        amazon/aws-cli ecr get-login-password | docker login ${registryUrl}
                         docker push "${registryUrl}/my-app:latest"
                         """
                     }
