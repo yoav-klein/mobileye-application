@@ -19,8 +19,8 @@ pipeline {
                         amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin ${registryUrl}
                         docker push "${registryUrl}/my-app:latest"
                         """
-                    }
                 }
+               
             }
         }
         stage('Update Service') {
