@@ -8,29 +8,11 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            steps {
-                script {
-                    
-                    /*withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws_account',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        def awsImage = docker.image('amazon/aws-cli')
-                        awsImage.pull()
-                        def runArgs = "-e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -e AWS_REGION=${region}"
-                        def runCmd = "ecs update-service --cluster=${clusterName} --service=${serviceName} --force-new-deployment"
-                        awsImage.run(runArgs, runCmd)
-                    }
-                    
-                    def my_image = docker.build("my-app:latest")
-                    docker.withRegistry(registryUrl,  "ecr_login") {
-                        my_image.push('latest')
-                     }
-                     */
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws_account',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+            steps {                
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                credentialsId: 'aws_account',
+                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                         sh script: """
                         docker build -t "${registryUrl}/my-app:latest" .
                         docker run -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_REGION=${region} \
