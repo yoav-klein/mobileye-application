@@ -31,7 +31,7 @@ pipeline {
                     credentialsId: 'aws_account',
                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                        sh returnStdout: true, script: """
+                        sh script: """
                         docker build -t "${registryUrl}/my-app:latest" .
                         docker run -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_REGION=${region} \
                         amazon/aws-cli ecr get-login-password
