@@ -1,5 +1,5 @@
 
-String registry_url = "https://428924725037.dkr.ecr.us-east-1.amazonaws.com"
+String registry_url = "https://654328202400.dkr.ecr.us-east-1.amazonaws.com"
 pipeline {
     agent any
     stages {
