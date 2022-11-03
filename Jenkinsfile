@@ -27,7 +27,7 @@ pipeline {
                         def aws_image = docker.image('amazon/aws-cli')
                         aws_image.pull()
                         def runArgs = "-e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -e AWS_REGION=us-east-1"
-                        def runCmd = "aws ecs update-service --cluster=${clusterName} --service=${serviceName} --force-new-deployment"
+                        def runCmd = "ecs update-service --cluster=${clusterName} --service=${serviceName} --force-new-deployment"
                         aws_image.run(runArgs, runCmd) 
                         //{
                                     // sh: "aws ecs update-service --cluster=${clusterName} --service=${serviceName} --force-new-deployment"
