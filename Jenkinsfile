@@ -1,5 +1,5 @@
 
-String registryUrl = "654328202400.dkr.ecr.us-east-1.amazonaws.com"
+String registryUrl = "787637552527.dkr.ecr.us-east-1.amazonaws.com"
 String clusterName = "myCluster"
 String serviceName = "service"
 String region = "us-east-1"
